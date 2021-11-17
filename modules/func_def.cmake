@@ -2,7 +2,7 @@ function(stmpfs_add_test TEST DESCRIPTION)
     set(TEST_NAME "UT_${TEST}")
 
     add_executable(${TEST_NAME} "tests/${TEST}_test.cpp")
-    target_link_libraries(${TEST_NAME} PUBLIC stmpfs)
+    target_link_libraries(${TEST_NAME} PUBLIC stmpfs ${EXTERNAL_LIBRARIES})
     target_include_directories(${TEST_NAME} PUBLIC src/include)
 
     add_test(NAME ${TEST_NAME}
@@ -22,7 +22,8 @@ endfunction()
 function(add_ext_lib LIBNAME SOURCE_FILE_VAL_NAME)
     message("External library `${LIBNAME}` added")
     add_library(${LIBNAME} STATIC ${SOURCE_FILE_VAL_NAME})
-    set(EXTERNAL_LIBRARIES ${EXTERNAL_LIBRARIES} ${LIBNAME})
+    target_include_directories(${LIBNAME} PUBLIC src/include)
+    set(EXTERNAL_LIBRARIES ${EXTERNAL_LIBRARIES} ${LIBNAME} PARENT_SCOPE)
 endfunction()
 
 function(generate_ext_lib_files FILENAME FPREFIX RETURN_VAL_NAME)

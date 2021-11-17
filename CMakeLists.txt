@@ -15,22 +15,25 @@ endif()
 default_definition(STMPFS_PREFIX "\"(stmpfs) \"")
 
 # add external library
-#set(ADDR2LINE_SRC_FILES "")
-#set(ADDR2LINE_SRC_FILE_NO_PREFIX addr2line.cpp)
-#generate_ext_lib_files(${ADDR2LINE_SRC_FILE_NO_PREFIX}
-#        addr2line ADDR2LINE_SRC_FILES)
-#add_ext_lib(addr2line ${ADDR2LINE_SRC_FILES})
+set(SHA256SUM_SRC_FILES "")
+set(SHA256SUM_SRC_FILE_NO_PREFIX sha256sum.cpp)
+generate_ext_lib_files(${SHA256SUM_SRC_FILE_NO_PREFIX}
+        sha256sum SHA256SUM_SRC_FILES)
+add_ext_lib(sha256sum ${SHA256SUM_SRC_FILES})
 
 # STEMPFS Static Library
 add_library(stmpfs STATIC
         src/stmpfs_error.cpp    src/include/stmpfs_error.h
         src/debug.cpp           src/include/debug.h
+        src/buffer.cpp          src/include/buffer.h
         )
 target_include_directories(stmpfs PUBLIC src/include)
+target_link_libraries(stmpfs PUBLIC ${EXTERNAL_LIBRARIES})
 
 # Unit tests
 if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     stmpfs_add_test(error "Error test")
     stmpfs_add_test(debug "Debug test")
+    stmpfs_add_test(buffer "Buffer test")
 endif()
 
