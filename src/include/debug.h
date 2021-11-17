@@ -1,6 +1,11 @@
 #ifndef STMPFS_REWRITE_DEBUG_H
 #define STMPFS_REWRITE_DEBUG_H
 
+/** @file
+ *
+ * This file defines operations for runtime debug support
+ */
+
 #include <execinfo.h>
 #include <sys/xattr.h>
 #include <sys/sysinfo.h>

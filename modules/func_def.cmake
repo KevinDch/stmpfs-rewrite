@@ -1,4 +1,3 @@
-
 function(stmpfs_add_test TEST DESCRIPTION)
     set(TEST_NAME "UT_${TEST}")
 

@@ -1,6 +1,11 @@
 #include <debug.h>
 #include <iostream>
 
+/** @file
+ *
+ * This file handles test for runtime debug support
+ */
+
 void func2()
 {
     FUNCTION_INFO;

@@ -6,6 +6,12 @@
 #include <string>
 #include <array>
 
+/** @file
+ *
+ * This file defines operations for runtime debug support
+ */
+
+
 bool __is_addr2line_available = false;
 const char * __path_to_executable = nullptr;
 

@@ -1,6 +1,12 @@
 #include <stmpfs_error.h>
 #include <iostream>
 
+/** @file
+ *
+ * This file defines test for error class
+ */
+
+
 int main()
 {
     try {
