@@ -26,6 +26,7 @@ add_library(stmpfs STATIC
         src/stmpfs_error.cpp    src/include/stmpfs_error.h
         src/debug.cpp           src/include/debug.h
         src/buffer.cpp          src/include/buffer.h
+        src/pathname_t.cpp      src/include/pathname_t.h
         )
 target_include_directories(stmpfs PUBLIC src/include)
 target_link_libraries(stmpfs PUBLIC ${EXTERNAL_LIBRARIES})
@@ -35,5 +36,6 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     stmpfs_add_test(error "Error test")
     stmpfs_add_test(debug "Debug test")
     stmpfs_add_test(buffer "Buffer test")
+    stmpfs_add_test(pathname "Pathname test")
 endif()
 
