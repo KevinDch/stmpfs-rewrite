@@ -1,3 +1,4 @@
+
 function(stmpfs_add_test TEST DESCRIPTION)
     set(TEST_NAME "UT_${TEST}")
 
@@ -17,4 +18,16 @@ function(default_definition DEFINITION DEFAULT_VAL)
     if ("X${${DEFINITION}}" STREQUAL "X")
         add_compile_definitions("${DEFINITION}=${DEFAULT_VAL}")
     endif()
+endfunction()
+
+function(add_ext_lib LIBNAME SOURCE_FILE_VAL_NAME)
+    message("External library `${LIBNAME}` added")
+    add_library(${LIBNAME} STATIC ${SOURCE_FILE_VAL_NAME})
+    set(EXTERNAL_LIBRARIES ${EXTERNAL_LIBRARIES} ${LIBNAME})
+endfunction()
+
+function(generate_ext_lib_files FILENAME FPREFIX RETURN_VAL_NAME)
+    foreach(FILE ${FILENAME})
+        set(${RETURN_VAL_NAME} src/ext_lib/${FPREFIX}/${FILE} PARENT_SCOPE)
+    endforeach()
 endfunction()
