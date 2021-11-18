@@ -27,15 +27,17 @@ add_library(stmpfs STATIC
         src/debug.cpp           src/include/debug.h
         src/buffer.cpp          src/include/buffer.h
         src/pathname_t.cpp      src/include/pathname_t.h
+        src/inode.cpp           src/include/inode.h
         )
 target_include_directories(stmpfs PUBLIC src/include)
 target_link_libraries(stmpfs PUBLIC ${EXTERNAL_LIBRARIES})
 
 # Unit tests
 if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
-    stmpfs_add_test(error "Error test")
-    stmpfs_add_test(debug "Debug test")
-    stmpfs_add_test(buffer "Buffer test")
-    stmpfs_add_test(pathname "Pathname test")
+    stmpfs_add_test(error       "Error test")
+    stmpfs_add_test(debug       "Debug test")
+    stmpfs_add_test(buffer      "Buffer test")
+    stmpfs_add_test(pathname    "Pathname test")
+    stmpfs_add_test(inode       "Inode test")
 endif()
 

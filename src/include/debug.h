@@ -6,12 +6,13 @@
  * This file defines operations for runtime debug support
  */
 
+#ifdef CMAKE_BUILD_DEBUG
+
+#include <iostream>
 #include <execinfo.h>
 #include <sys/xattr.h>
 #include <sys/sysinfo.h>
 #include <string>
-
-#ifdef CMAKE_BUILD_DEBUG
 
 /// current executable pathname, filled by main()
 /// if not filled, addr2line in OBTAIN_STACK_FRAME will not be available
@@ -59,7 +60,7 @@ std::string __clean_addr2line_output(const std::string& input);
         {                                               \
             std::cerr << "\t" << __strings[__i];        \
             if (__path_to_executable && __is_addr2line_available)                       \
-            {                                           \
+            {                                                                           \
                 std::cerr << " " << __clean_addr2line_output(                           \
                                     __exec_cmd(std::string("addr2line a -f -p -e ")     \
                                         + __path_to_executable + " "                    \
