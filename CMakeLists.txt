@@ -28,6 +28,7 @@ add_library(stmpfs STATIC
         src/buffer.cpp          src/include/buffer.h
         src/pathname_t.cpp      src/include/pathname_t.h
         src/inode.cpp           src/include/inode.h
+        src/fuse_ops.cpp        src/include/fuse_ops.h
         )
 target_include_directories(stmpfs PUBLIC src/include)
 target_link_libraries(stmpfs PUBLIC ${EXTERNAL_LIBRARIES})

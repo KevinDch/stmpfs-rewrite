@@ -7,7 +7,6 @@
  * This file defines test for inode_t
  */
 
-
 int main(int argc, char ** argv)
 {
     try
@@ -16,31 +15,11 @@ int main(int argc, char ** argv)
         __check_addr2line();
 
         inode_t root;
-        root.fs_stat.st_mode = S_IFDIR;
-        root.init_as_dir();
+        root.resize(4);
+        root.write("123\n", 4, 0);
+        std::cout << root.get_sha256sum() << std::endl;
 
-        root.new_child("file1");
-        root.new_child("file2");
-
-        auto file2 = root.get_inode_by_name("file2");
-        file2->write("123", 3, 0);
-
-        root.new_child("dir1");
-        auto dir1 = root.get_inode_by_name("dir1");
-        dir1->fs_stat.st_mode = S_IFDIR;
-        dir1->init_as_dir();
-        dir1->new_child("file3");
-
-        root.snapshot(1);
-        root.delete_child("file2");
-
-        root.replicate_snapshot_0("file1");
-        root.get_inode_by_name("file1")->write("345", 3, 0);
-
-        auto inode = root.get_inode_by_name("file2", 1);
-        std::cout << inode->get_sha256sum() << std::endl;
-
-        root.delete_snapshot(1);
+        return root.get_sha256sum() != "181210f8f9c779c26da1d9b2075bde0127302ee0e3fca38c9a83f5b1dd8e5d3b";
     }
     catch (std::exception & err)
     {

@@ -1,6 +1,11 @@
 #ifndef STMPFS_REWRITE_INODE_H
 #define STMPFS_REWRITE_INODE_H
 
+/** @file
+ *
+ * This file defines inode and relevant operations
+ */
+
 #include <buffer.h>
 #include <map>
 #include <sys/types.h>
@@ -11,40 +16,20 @@ class inode_t
 private:
 
     buffer_t buffer;
-
-    std::map < uint32_t, std::vector < inode_t * > > children;
-
-    std::string name;
-
-    void create_snapshot_for_children(uint32_t version);
-    void delete_snapshot_for_children(uint32_t version);
+    std::map < std::string, inode_t > children;
 
 public:
 
-    /// init children if inode is a dir
-    void init_as_dir()
-        { children.emplace(0, std::vector < inode_t * >()); }
-
-    struct stat fs_stat { }; // file/dir stat, publicly changeable
-
-    void snapshot(uint32_t version);
-
-    void delete_snapshot(uint32_t version);
-
-    inode_t * get_inode_by_name(const std::string& _name, uint32_t version = 0);
-
-    uint32_t snapshout_link_count = 1;
-
-    void new_child(const std::string& _name);
-
-    void delete_child(const std::string& _name);
-
-    void replicate_snapshot_0(const std::string& _name);
+    /// file/dir stat, publicly changeable
+    struct stat fs_stat { };
 
     /// resize the buffer
     /// @param new_size new size of buffer
     /// @return none
-    void resize(size_t new_size) { buffer.resize(new_size); }
+    void resize(size_t new_size)
+        {   buffer.resize(new_size);
+            fs_stat.st_size = (off64_t)new_size;
+        }
 
     /// read from buffer
     /// @param buffer output buffer

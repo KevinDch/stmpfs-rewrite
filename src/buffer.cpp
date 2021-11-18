@@ -2,7 +2,7 @@
 #include <sha256sum.h>
 
 /**
- * @file this file defines a simple buffer **/
+ * @file this file implements a simple buffer **/
 
 void buffer_t::resize(size_t new_size)
 {
