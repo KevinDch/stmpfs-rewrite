@@ -102,3 +102,10 @@ void __check_addr2line()
 {
     __is_addr2line_available = (system("addr2line --help >/dev/null 2>/dev/null") == 0);
 }
+
+struct timespec current_time()
+{
+    struct timespec ts{};
+    timespec_get(&ts, TIME_UTC);
+    return ts;
+}

@@ -78,9 +78,9 @@ std::string __clean_addr2line_output(const std::string& input);
 
 # define FUNCTION_INFO                                  \
 {                                                       \
-    std::cerr << "\nFrom " << __FILE__ << ":"           \
+    std::cerr << "From " << __FILE__ << ":"             \
               << __LINE__ << ": "                       \
-              << __FUNCTION__ << ":";                   \
+              << __FUNCTION__ << ": ";                  \
 } __asm__("nop") /* suppress IDE "empty statement" warning */
 
 
@@ -91,5 +91,6 @@ std::string __clean_addr2line_output(const std::string& input);
 
 #endif // CMAKE_BUILD_DEBUG
 
+struct timespec current_time();
 
 #endif //STMPFS_REWRITE_DEBUG_H

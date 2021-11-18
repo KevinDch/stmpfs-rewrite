@@ -26,6 +26,11 @@ public:
     typedef pathname_t::iterator iterator;
     [[nodiscard]] iterator begin()  { return pathname.begin(); }
     [[nodiscard]] iterator end()    { return pathname.end(); }
+
+    /// return last element and pop_back
+    std::string target_name();
+
+    size_t size() { return pathname.size(); }
 };
 
 #endif //STMPFS_REWRITE_PATHNAME_T_H

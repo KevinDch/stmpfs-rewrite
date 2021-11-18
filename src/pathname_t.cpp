@@ -39,3 +39,15 @@ stmpfs_pathname_t::stmpfs_pathname_t(std::string pathname)
 
     this->pathname.emplace_back(cur);
 }
+
+std::string stmpfs_pathname_t::target_name()
+{
+    if (pathname.empty())
+    {
+        return "";
+    }
+
+    std::string ret = pathname.back();
+    pathname.pop_back();
+    return ret;
+}

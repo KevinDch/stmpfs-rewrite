@@ -15,11 +15,17 @@ int main(int argc, char ** argv)
         __check_addr2line();
 
         inode_t root;
-        root.resize(4);
-        root.write("123\n", 4, 0);
-        std::cout << root.get_sha256sum() << std::endl;
 
-        return root.get_sha256sum() != "181210f8f9c779c26da1d9b2075bde0127302ee0e3fca38c9a83f5b1dd8e5d3b";
+        root.add_child("dir1");
+        root.add_child("file1");
+
+        auto & inode = root.get_inode_by_name("dir1");
+        inode.write("123\n", 4, 0);
+        std::cout << inode.get_sha256sum() << std::endl;
+
+        root.delete_child("file1");
+
+        return inode.get_sha256sum() != "181210f8f9c779c26da1d9b2075bde0127302ee0e3fca38c9a83f5b1dd8e5d3b";
     }
     catch (std::exception & err)
     {

@@ -11,6 +11,10 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     add_compile_definitions(CMAKE_BUILD_DEBUG=1)
 endif()
 
+add_compile_definitions("_FILE_OFFSET_BITS=64")
+add_compile_definitions("PACKAGE_NAME=\"stmpfs\"")
+add_compile_definitions("PACKAGE_VERSION=\"0.0.1\"")
+
 # default definitions
 default_definition(STMPFS_PREFIX "\"(stmpfs) \"")
 
@@ -42,3 +46,6 @@ if ("X${CMAKE_BUILD_TYPE}" STREQUAL "XDebug")
     stmpfs_add_test(inode       "Inode test")
 endif()
 
+add_executable(mount.stmpfs src/main.cpp)
+target_include_directories(mount.stmpfs PUBLIC src/include)
+target_link_libraries(mount.stmpfs PUBLIC ${EXTERNAL_LIBRARIES} stmpfs fuse)
